@@ -26,6 +26,8 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyLi
         
     public PanelGrafico() {
         initComponents();
+        this.addKeyListener(this);
+        this.setFocusable(true);
         this.setBounds(10,10,350,350);
         this.setBackground(Color.red);
         this.setSize(350,350);
@@ -74,14 +76,15 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyLi
     @Override
     public void run() {
       if(x+32<this.getHeight() && y+32<this.getHeight() && six ){
-        x++;
-        y++;
-              
+//       // x++;
+//        y++;
+          System.out.println("maxima");
       }else{
           six =  false;}
       if (x+32>32 && y+32>32 && !six){
-          x--;
-          y--;
+//          x--;
+//          y--;
+          System.out.println("minima");
           six=false;
       }else{
           six = true;
@@ -99,31 +102,37 @@ public void reversa(){
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        }
 
     @Override
     public void keyPressed(KeyEvent ke) {
         int codigo = ke.getKeyCode();
         if(codigo==ke.VK_UP)
         {
-            JOptionPane.showMessageDialog(null,"arriba"); 
-        }if(codigo==ke.VK_LEFT)
+             y=y-10;
+            System.out.println("arriba"); 
+           
+        }
+        if(codigo==ke.VK_LEFT)
         {
-            JOptionPane.showMessageDialog(null,"Derecha");
-        }   if(codigo==ke.VK_RIGHT)
-        {
-            JOptionPane.showMessageDialog(null,"izquierda");
-        }   if(codigo==ke.VK_DOWN)
-        {
-            JOptionPane.showMessageDialog(null,"abajo");
-        }      
+            x=x-10;
+            System.out.println("Derecha");
+        }  
+        if(codigo==ke.VK_RIGHT)
+             
+        {   
+            x=x+10;
+            System.out.println("izquierda");
+        }
+        if(codigo==ke.VK_DOWN){
+           
+        System.out.println("abajo");
+            y=y+10;}
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
