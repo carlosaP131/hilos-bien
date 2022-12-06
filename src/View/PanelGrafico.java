@@ -12,11 +12,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
-public class PanelGrafico extends javax.swing.JPanel implements Runnable{
+public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyListener{
         private  int x=20;
         private  int y=20;
         private boolean six=true;
@@ -70,8 +73,10 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable{
 
     @Override
     public void run() {
-      if(x+60<this.getHeight() && y+60<this.getHeight() && six ){
-        reversa();
+      if(x+32<this.getHeight() && y+32<this.getHeight() && six ){
+        x++;
+        y++;
+              
       }else{
           six =  false;}
       if (x+32>32 && y+32>32 && !six){
@@ -91,6 +96,34 @@ public void reversa(){
     y--;
     
 }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        int codigo = ke.getKeyCode();
+        if(codigo==ke.VK_UP)
+        {
+            JOptionPane.showMessageDialog(null,"arriba"); 
+        }if(codigo==ke.VK_LEFT)
+        {
+            JOptionPane.showMessageDialog(null,"Derecha");
+        }   if(codigo==ke.VK_RIGHT)
+        {
+            JOptionPane.showMessageDialog(null,"izquierda");
+        }   if(codigo==ke.VK_DOWN)
+        {
+            JOptionPane.showMessageDialog(null,"abajo");
+        }      
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
