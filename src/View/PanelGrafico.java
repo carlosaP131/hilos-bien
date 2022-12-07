@@ -23,6 +23,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyLi
         private  int x=20;
         private  int y=20;
         private boolean six=true;
+        private int angulo=0;
         
     public PanelGrafico() {
         initComponents();
@@ -43,7 +44,10 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyLi
 //        g2d.drawOval(x, y, 50, 50);
         Toolkit t = Toolkit.getDefaultToolkit();
             Image img = t.getImage("src/img/corazon.png");
+            g2d.rotate(Math.PI*angulo/180,x,y);
             g2d.drawImage(img, x,y, this);
+            
+            
         Thread hilo = new Thread(this);
         hilo.start();
             try {
@@ -75,29 +79,35 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable , KeyLi
 
     @Override
     public void run() {
-      if(x+32<this.getHeight() && y+32<this.getHeight() && six ){
-//       // x++;
-//        y++;
-          System.out.println("maxima");
-      }else{
-          six =  false;}
-      if (x+32>32 && y+32>32 && !six){
-//          x--;
-//          y--;
-          System.out.println("minima");
-          six=false;
-      }else{
-          six = true;
-      }
-        System.out.println("x = "+x+" y= "+y);
-         
-        
+       Validadpared();
     }
 
 public void reversa(){
     x--;
     y--;
     
+}
+
+public void Validadpared(){
+      if(x+32<this.getHeight() && y+32<this.getHeight() && six ){
+        x++;
+        y++;
+          System.out.println("maxima");
+        
+      }else{
+          six =  false;}
+      if (x+32>32 && y+32>32 && !six){
+          x--;
+          y++;
+          System.out.println("minima");
+          six=false;
+      }else{
+          six = true;
+      }
+        System.out.println("x = "+x+" y= "+y);
+  
+   
+            
 }
 
     @Override
@@ -109,6 +119,11 @@ public void reversa(){
         int codigo = ke.getKeyCode();
         if(codigo==ke.VK_UP)
         {
+            
+            if(angulo==360){
+                angulo =0;
+            }
+             angulo+=90;
              y=y-10;
             System.out.println("arriba"); 
            
