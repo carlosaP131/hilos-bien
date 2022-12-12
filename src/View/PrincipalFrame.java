@@ -1,8 +1,8 @@
 /** ****************************************************************************
  *Autor:Carlos Aurelio Alcántara Pérez
- *Fecha de creación: 18-11-2022 ***
- *Fecha de actualización:31-11-2022
- *Descripción: Clase controller del Jugador
+ *Fecha de creación: 5-12-2022 ***
+ *Fecha de actualización:11-12-2022
+ *Descripción: Clase principal
  **
  * ****************************************************************************/
 package View;
@@ -40,22 +40,22 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iPlay.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iPausa.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel1.setText("PLAY");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         jLabel2.setText("PAUSE");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Flappy Bird pipe (tubería) - La Verdadera Historia de Flappy Bird.jpg"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 70, 410));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 410));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
 

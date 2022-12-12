@@ -1,8 +1,8 @@
 /** ****************************************************************************
  *Autor:Carlos Aurelio Alcántara Pérez
- *Fecha de creación: 18-11-2022 ***
- *Fecha de actualización:31-11-2022
- *Descripción: Clase controller del Jugador
+ *Fecha de creación: 5-12-2022 ***
+ *Fecha de actualización:11-12-2022
+ *Descripción: Clase creacion de los paneles y objetos
  **
  * *************************************************************************** */
 package View;
@@ -12,34 +12,32 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
-public class PanelGrafico extends javax.swing.JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener {
+public class PanelGrafico extends javax.swing.JPanel implements Runnable {
 
-    private int x = 20;
-    private int y = 20;
+    private int x = 0;
+    private int y = 0;
     int xa = 1;
     int ya = 1;
-    private int posx = 32;
-    private int posy = 32;
+    int xb = 1;
+    int yb = 1;
+    private int posx = 350;
+    private int posy = 350;
     private int angulo = 0;
     private static final int DIAMETER = 30;
     private ImageIcon fondo;
+    private static final int WITH = 30;
 
     public PanelGrafico() {
-        initComponents();
-        this.addKeyListener(this);
+        initComponents();   
         this.setFocusable(true);
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
         this.setBounds(10, 10, 350, 350);
         this.setBackground(Color.red);
         this.setSize(350, 350);
@@ -50,23 +48,21 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable, KeyLis
         //cargar el fondo del panel 
         Dimension tamaño = this.getSize();
         fondo = new ImageIcon(getClass().getResource("../img/fondo2.gif"));
-        g.drawImage(fondo.getImage(), 0, 0, tamaño.width,tamaño.height,null);
+        g.drawImage(fondo.getImage(), 0, 0, tamaño.width, tamaño.height, null);
         setOpaque(false);
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.yellow);
-        g2d.fillOval(posx, posy, 50, 50);
-        g2d.setColor(Color.BLUE);
-        g2d.drawOval(posx, posy, 50, 50);
+        Graphics2D g2d2 = (Graphics2D) g;
+        Toolkit t2 = Toolkit.getDefaultToolkit();
+        Image img2 = t2.getImage("src/img/pelota.png");
         Toolkit t = Toolkit.getDefaultToolkit();
-        Image img = t.getImage("src/img/pelota.png");
-        g2d.rotate(Math.PI * angulo / 180, x, y);
+        Image img = t.getImage("src/img/pelota3.png");
         g2d.drawImage(img, x, y, this);
-
+        g2d2.drawImage(img2, posx, posy, this);
         Thread hilo = new Thread(this);
         hilo.start();
         try {
-            Thread.sleep(1);
+            Thread.sleep(3);
         } catch (InterruptedException ex) {
             Logger.getLogger(PanelGrafico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,126 +88,64 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable, KeyLis
 
     @Override
     public void run() {
-        Validadpared();
+        Mover1();
+        Mover2();
     }
 
-    public void reversa() {
-        x--;
-        y--;
+    public void Mover1() {
 
-    }
-
-    public void Validadpared() {
-//      if(x+32<this.getHeight() && y+32<this.getWidth()&& six ){
-//        x++;
-//        y++;
-////          System.out.println("maxima");
-//        
-//      }else{
-//          six =  false;}
-//      if (x+32>this.getHeight() && y+32>this.getWidth() && !six){
-//          x--;
-//          y++;
-////          System.out.println("minima");
-//          six=false;
-//      }else{
-//          six = true;
-//      }
-////        System.out.println("x = "+x+" y= "+y);
-//  
-//   
         if (x + xa < 0) {
             xa = 1;
         }
-        if (x + xa > this.getWidth() - DIAMETER) {
+        if (x + xa > this.getWidth() - WITH) {
             xa = -1;
         }
         if (y + ya < 0) {
             ya = 1;
         }
-        if (y + ya > this.getHeight() - DIAMETER) {
+        if (y + ya > this.getHeight() - WITH) {
             ya = -1;
+        }
+        if (collision()) {
+            ya = 1;
+
         }
 
         x = x + xa;
         y = y + ya;
     }
 
-    @Override
-    public void keyTyped(KeyEvent ke) {
-    }
+    public void Mover2() {
 
-    @Override
-    public void keyPressed(KeyEvent ke) {
-        int codigo = ke.getKeyCode();
-        if (codigo == ke.VK_UP) {
-
-            if (angulo == 360) {
-                angulo = 0;
-            }
-            angulo += 90;
-            y = y - 10;
-            System.out.println("arriba");
-
+        if (posx + xb < 0) {
+            xb = 1;
         }
-        if (codigo == ke.VK_LEFT) {
-            x = x - 10;
-            System.out.println("Derecha");
+        if (posx + xb > this.getWidth() - WITH) {
+            xb = -1;
         }
-        if (codigo == ke.VK_RIGHT) {
-            x = x + 10;
-            System.out.println("izquierda");
+        if (posy + yb < 0) {
+            yb = 1;
         }
-        if (codigo == ke.VK_DOWN) {
-
-            System.out.println("abajo");
-            y = y + 10;
+        if (posy + yb > this.getHeight() - WITH) {
+            yb = -1;
         }
+
+        posx = posx + xb;
+        posy = posy + yb;
     }
 
-    @Override
-    public void keyReleased(KeyEvent ke) {
+    
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, WITH, WITH);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent me) {
-//                System.out.println("click");
-        posx = me.getX();
-        posy = me.getY();
-
+    private boolean collision() {
+        return this.getBounds().intersects(getBounds2());
     }
-
-    @Override
-    public void mousePressed(MouseEvent me) {
-
+     public Rectangle getBounds2() {
+        return new Rectangle(posx, posy, DIAMETER, DIAMETER);
     }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent me) {
-        System.out.println("moviendo");
-        if ((me.getX() >= 0 && me.getY() >= 0) && me.getX() <= this.getWidth() && me.getY() <= this.getHeight()) {
-            x = me.getX();
-            y = me.getY();
-        }
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent me) {
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
