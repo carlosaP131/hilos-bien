@@ -1,20 +1,23 @@
 /** ****************************************************************************
  *Autor:Carlos Aurelio Alcántara Pérez
  *Fecha de creación: 5-12-2022 ***
- *Fecha de actualización:11-12-2022
+ *Fecha de actualización:12-12-2022
  *Descripción: Clase principal
  **
  * ****************************************************************************/
 package View;
 
-
+/**
+ * 
+ * @author Carlos Aurelio Alcántara Pérez
+ */
 public class PrincipalFrame extends javax.swing.JFrame {
-       private final PanelGrafico pg;
+       private final PanelGrafico pg;// Instancia del Panel Grafico
    
     public PrincipalFrame() {
         initComponents();
-         pg = new PanelGrafico();
-        this.add(this.pg);
+         pg = new PanelGrafico(); //Inicialisacion del panel grafico 
+        this.add(this.pg);//Agregamos el panel Grafico 
     }
 
   
@@ -54,7 +57,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jLabel2.setText("PAUSE");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Flappy Bird pipe (tubería) - La Verdadera Historia de Flappy Bird.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iFondoDerecha.jpg"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 410));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
@@ -62,7 +65,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo abajo.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iFondoAbajo.jpg"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);

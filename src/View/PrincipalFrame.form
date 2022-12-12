@@ -96,7 +96,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/Flappy Bird pipe (tuber&#xed;a) - La Verdadera Historia de Flappy Bird.jpg"/>
+              <Image iconType="3" name="/img/iFondoDerecha.jpg"/>
             </Property>
           </Properties>
           <Constraints>
@@ -126,7 +126,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/fondo abajo.jpg"/>
+              <Image iconType="3" name="/img/iFondoAbajo.jpg"/>
             </Property>
           </Properties>
           <Constraints>
