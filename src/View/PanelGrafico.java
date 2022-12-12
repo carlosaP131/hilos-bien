@@ -2,8 +2,8 @@
  *Autor:Carlos Aurelio Alcántara Pérez
  *Fecha de creación: 5-12-2022 ***
  *Fecha de actualización:11-12-2022
- *Descripción: Clase creacion de los paneles y objetos
- **
+ *Descripción: Clase creacion de los paneles y objetos tambien 
+ *
  * *************************************************************************** */
 package View;
 
@@ -14,8 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -30,12 +28,13 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     int yb = 1;
     private int posx = 350;
     private int posy = 350;
-    private int angulo = 0;
+    
     private static final int DIAMETER = 30;
     private ImageIcon fondo;
     private static final int WITH = 30;
-
+    
     public PanelGrafico() {
+        
         initComponents();   
         this.setFocusable(true);
         this.setBounds(10, 10, 350, 350);
@@ -74,20 +73,29 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSlider1 = new javax.swing.JSlider();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(274, Short.MAX_VALUE)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
     public void run() {
+        x = x+ jSlider1.getValue();
         Mover1();
         Mover2();
     }
@@ -147,5 +155,6 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         return new Rectangle(posx, posy, DIAMETER, DIAMETER);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 }
