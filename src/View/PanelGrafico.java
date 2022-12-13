@@ -27,13 +27,13 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     private int y = 0;// Variable y para la posicion de la pelota 1
     private int posx = 350;
     private int posy = 350;
-    int xa = 1;// Variable xa para el aumento de la posicion de la pelota 1
-    int ya = 1;// Variable xa para el aumento de la posicion de la pelota 1
-    int xb = 1;// Variable xb para el aumento de la posicion de la pelota 2
-    int yb = 1;// Variable xb para el aumento de la posicion de la pelota 2
+    private int xa = 1;// Variable xa para el aumento de la posicion de la pelota 1
+    private int ya = 1;// Variable xa para el aumento de la posicion de la pelota 1
+    private int xb = 1;// Variable xb para el aumento de la posicion de la pelota 2
+    private int yb = 1;// Variable xb para el aumento de la posicion de la pelota 2
     private static final int Diametro = 32;//Diametro del contorno de las imagenes
     private ImageIcon Fondo;//Fondo 
-
+    private Thread hilo;
 
     public PanelGrafico() {
 
@@ -68,7 +68,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         Image img = t.getImage("src/img/iPelota2.png");//Cargar imagen pelota2
         g2d.drawImage(img, x, y, this);
         g2d2.drawImage(img2, posx, posy, this);
-        Thread hilo = new Thread(this);
+        hilo = new Thread(this);
         hilo.start();
         try {
 
@@ -116,6 +116,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         Mover1();
         Mover2();
     }
+    
      /**
       * Evento de la pelota 1
       */
@@ -158,6 +159,10 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         if (posy + yb > this.getHeight() - Diametro) {
             yb = -1;
         }
+        if (collision()) {
+            yb = 1;
+
+        }
 
         posx = posx + xb;
         posy = posy + yb;
@@ -183,6 +188,13 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     public Rectangle getBounds2() {
         return new Rectangle(posx, posy, Diametro, Diametro);
     }
+    public void pausa(){
+      
+    }
+    public void play(){
+      
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
