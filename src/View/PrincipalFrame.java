@@ -1,26 +1,26 @@
 /** ****************************************************************************
  *Autor:Carlos Aurelio Alcántara Pérez
- *Fecha de creación: 5-12-2022 
+ *Fecha de creación: 5-12-2022
  *Fecha de actualización:12-12-2022
  *Descripción: Clase principal
  *
- * ****************************************************************************/
+ * *************************************************************************** */
 package View;
 
 /**
- * 
+ *
  * @author Carlos Aurelio Alcántara Pérez
  */
 public class PrincipalFrame extends javax.swing.JFrame {
-       private final PanelGrafico pg;// Instancia del Panel Grafico
-   
+
+    private final PanelGrafico pg;// Instancia del Panel Grafico
+
     public PrincipalFrame() {
         initComponents();
-         pg = new PanelGrafico(); //Inicialisacion del panel grafico 
+        pg = new PanelGrafico(); //Inicialisacion del panel grafico 
         this.add(this.pg);//Agregamos el panel Grafico 
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -84,15 +84,15 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayMouseClicked
-       pg.setSrtStp(true);
+        pg.setSrtStp(true);
     }//GEN-LAST:event_PlayMouseClicked
 
     private void PausaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PausaMouseClicked
-       pg.setSrtStp(false);
+        pg.setSrtStp(false);
     }//GEN-LAST:event_PausaMouseClicked
 
     public static void main(String args[]) {
- 
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PrincipalFrame().setVisible(true);
