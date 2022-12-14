@@ -84,11 +84,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayMouseClicked
-      pg.play();
+       pg.setSrtStp(true);
     }//GEN-LAST:event_PlayMouseClicked
 
     private void PausaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PausaMouseClicked
-        pg.pausa();
+       pg.setSrtStp(false);
     }//GEN-LAST:event_PausaMouseClicked
 
     public static void main(String args[]) {

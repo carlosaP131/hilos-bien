@@ -14,11 +14,19 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
+
 /**
- * 
+ *
  * @author Carlos Aurelio Alcántara Pérez
  */
 public class PanelGrafico extends javax.swing.JPanel implements Runnable {
@@ -33,7 +41,8 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     private int yb = 1;// Variable xb para el aumento de la posicion de la pelota 2
     private static final int Diametro = 32;//Diametro del contorno de las imagenes
     private ImageIcon Fondo;//Fondo 
-    private Thread hilo;
+    private boolean srtStp = true;
+    public Thread hilo;
 
     public PanelGrafico() {
 
@@ -48,7 +57,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
     public void paint(Graphics g) {
         /**
          * Cargar el fondo del panel
-         */ 
+         */
         Dimension tamaño = this.getSize();
         Fondo = new ImageIcon(getClass().getResource("../img/iFondo.gif"));
         g.drawImage(Fondo.getImage(), 0, 0, tamaño.width, tamaño.height, null);
@@ -63,13 +72,18 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
          */
         Graphics2D g2d2 = (Graphics2D) g;
         Toolkit t2 = Toolkit.getDefaultToolkit();
-        Image img2 = t2.getImage("src/img/iPelota1.png");//Cargar imagen pelota1
+        Image img2 = t2.getImage("src/img/iHongo.png");//Cargar imagen pelota1
         Toolkit t = Toolkit.getDefaultToolkit();
-        Image img = t.getImage("src/img/iPelota2.png");//Cargar imagen pelota2
+        Image img = t.getImage("src/img/iHongo.png");//Cargar imagen pelota2
         g2d.drawImage(img, x, y, this);
         g2d2.drawImage(img2, posx, posy, this);
         hilo = new Thread(this);
-        hilo.start();
+        if (srtStp) {
+            hilo.start();
+
+        } else {
+            hilo.interrupt();
+        }
         try {
 
             Thread.sleep(jSlider1.getValue());
@@ -86,6 +100,8 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
 
         jSlider1 = new javax.swing.JSlider();
 
+        setMinimumSize(new java.awt.Dimension(350, 350));
+
         jSlider1.setMaximum(20);
         jSlider1.setMinimum(1);
         jSlider1.setValue(1);
@@ -94,21 +110,21 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(274, Short.MAX_VALUE)
+                .addContainerGap(296, Short.MAX_VALUE)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
     /**
-     * Metodo run para la ejecucion de 
+     * Metodo run para la ejecucion de
      */
     @Override
     public void run() {
@@ -116,10 +132,10 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         Mover1();
         Mover2();
     }
-    
-     /**
-      * Evento de la pelota 1
-      */
+
+    /**
+     * Evento de la pelota 1
+     */
     public void Mover1() {
 
         if (x + xa < 0) {
@@ -142,9 +158,10 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         x = x + xa;
         y = y + ya;
     }
-   /**
-    * Evento de la pelota 2
-    */ 
+
+    /**
+     * Evento de la pelota 2
+     */
     public void Mover2() {
 
         if (posx + xb < 0) {
@@ -167,34 +184,49 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
         posx = posx + xb;
         posy = posy + yb;
     }
+
     /**
      * Método para calcular el contorno de la pelota 1
-     * @return regresa el contorno 
+     *
+     * @return regresa el contorno
      */
     public Rectangle getBounds() {
         return new Rectangle(x, y, Diametro, Diametro);
     }
+
     /**
      * Validar la colision
-     * @return Regresa true si si chocan y false si no  
+     *
+     * @return Regresa true si si chocan y false si no
      */
     private boolean collision() {
+        try {        
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/sonido/PelotaReboteAud.mp3"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        }
         return this.getBounds().intersects(getBounds2());
     }
+
     /**
      * Método para calcular el contorno de la pelota 1
-     * @return 
+     *
+     * @return
      */
     public Rectangle getBounds2() {
         return new Rectangle(posx, posy, Diametro, Diametro);
     }
-    public void pausa(){
-      
+
+    public void setSrtStp(boolean srtStp) {
+        this.srtStp = srtStp;
     }
-    public void play(){
-      
+
+    public boolean isSrtStp() {
+        return srtStp;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
