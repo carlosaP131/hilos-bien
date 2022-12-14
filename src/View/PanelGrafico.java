@@ -137,7 +137,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
      * Evento de la pelota 1
      */
     public void Mover1() {
-
+        int rebote = (int) (Math.random() * 10 + 1);
         if (x + xa < 0) {
             xa = 1;
         }
@@ -151,7 +151,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
             ya = -1;
         }
         if (collision()) {
-            ya = 1;
+            ya = rebote;
 
         }
 
@@ -163,7 +163,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
      * Evento de la pelota 2
      */
     public void Mover2() {
-
+        int rebote = (int)(Math.random()*10+1);
         if (posx + xb < 0) {
             xb = 1;
         }
@@ -177,7 +177,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
             yb = -1;
         }
         if (collision()) {
-            yb = 1;
+            yb = rebote;
 
         }
 
@@ -200,7 +200,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
      * @return Regresa true si si chocan y false si no
      */
     private boolean collision() {
-        
+
         return this.getBounds().intersects(getBounds2());
     }
 
