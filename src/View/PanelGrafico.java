@@ -200,13 +200,7 @@ public class PanelGrafico extends javax.swing.JPanel implements Runnable {
      * @return Regresa true si si chocan y false si no
      */
     private boolean collision() {
-        try {
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/sonido/PelotaReboteAud.mp3"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-        }
+        
         return this.getBounds().intersects(getBounds2());
     }
 

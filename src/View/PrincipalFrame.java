@@ -7,6 +7,14 @@
  * *************************************************************************** */
 package View;
 
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /**
  *
  * @author Carlos Aurelio Alcántara Pérez
@@ -47,6 +55,9 @@ public class PrincipalFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PlayMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PlayMouseEntered(evt);
+            }
         });
         jPanel1.add(Play, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
@@ -57,6 +68,9 @@ public class PrincipalFrame extends javax.swing.JFrame {
         Pausa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PausaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PausaMouseEntered(evt);
             }
         });
         jPanel1.add(Pausa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
@@ -90,6 +104,26 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private void PausaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PausaMouseClicked
         pg.setSrtStp(false);
     }//GEN-LAST:event_PausaMouseClicked
+
+    private void PlayMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayMouseEntered
+       try {
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/Sonidos/Sclickbot.mp3"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        }
+    }//GEN-LAST:event_PlayMouseEntered
+
+    private void PausaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PausaMouseEntered
+      try {
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/Sonidos/Sclickbot.mp3"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        }
+    }//GEN-LAST:event_PausaMouseEntered
 
     public static void main(String args[]) {
 
